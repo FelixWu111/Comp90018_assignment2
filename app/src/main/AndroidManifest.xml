@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.unimelb.BirdMigration">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.BirdMigration">
+        <activity android:name="org.unimelb.BirdMigration.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="org.unimelb.BirdMigration.ResultActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="org.unimelb.BirdMigration.StartActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <service android:name="org.unimelb.BirdMigration.MusicServer">
+            <intent-filter>
+                <action android:name="android.intent.action.MUSIC"/>
+                <category android:name="android.intent.category.default" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>
