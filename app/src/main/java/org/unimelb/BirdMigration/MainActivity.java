@@ -2,19 +2,26 @@ package org.unimelb.BirdMigration;
 
 import android.content.Intent;
 import android.graphics.Point;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     private final Handler handler = new Handler();
@@ -42,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
     // Object
     private Food food, food2, bomb;
+
+    private SensorManager sensorManager;
+    private Sensor lightSensor;
+    private SensorEventListener lightEventListener;
+    private float maxValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +88,52 @@ public class MainActivity extends AppCompatActivity {
         // Load the background music
         Intent intent = new Intent(getApplicationContext(), MusicServer.class);
         startService(intent);
+
+        // Declare light sensor
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+
+        if (lightSensor == null) {
+            Toast.makeText(this, "Light sensor is missing.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+        // Activities on light sensor value intake in every 2 seconds
+        lightEventListener = new SensorEventListener() {
+            private long lastTimestamp;
+
+            @Override
+            public void onSensorChanged(SensorEvent sensorEvent) {
+                long currentTimestamp = sensorEvent.timestamp;
+                if (currentTimestamp - lastTimestamp >= TimeUnit.SECONDS.toNanos(2)) {
+                    lastTimestamp = currentTimestamp;
+                    float value = sensorEvent.values[0];
+                    int brightness = (int) (255f * value / lightSensor.getMaximumRange());
+
+                    // Does not take effect in android emulators.
+                    WindowManager.LayoutParams lp = getWindow().getAttributes();
+                    lp.screenBrightness = brightness;
+                    getWindow().setAttributes(lp);
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int i) {
+
+            }
+        };
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(lightEventListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(lightEventListener);
     }
 
     // This method defines the moving position and distance of each object after starting game
