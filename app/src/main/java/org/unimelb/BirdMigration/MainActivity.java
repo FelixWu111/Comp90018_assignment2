@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
     private SensorManager sensorManager;
     private Sensor lightSensor;
     private SensorEventListener lightEventListener;
-    private float maxValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 
+        // In case the sensor does not exist. 
         if (lightSensor == null) {
             Toast.makeText(this, "Light sensor is missing.", Toast.LENGTH_SHORT).show();
             finish();
@@ -105,11 +105,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
                 long currentTimestamp = sensorEvent.timestamp;
+
+                // Read sensor data every 2 seconds
                 if (currentTimestamp - lastTimestamp >= TimeUnit.SECONDS.toNanos(2)) {
                     lastTimestamp = currentTimestamp;
                     float value = sensorEvent.values[0];
+
+                    // Limit the value in a valid range
                     int brightness = (int) (255f * value / lightSensor.getMaximumRange());
 
+                    // Adjust system brightness
                     // Does not take effect in android emulators.
                     WindowManager.LayoutParams lp = getWindow().getAttributes();
                     lp.screenBrightness = brightness;
