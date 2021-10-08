@@ -1,81 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background1"
-    tools:context="org.unimelb.BirdMigration.StartActivity"
-    android:orientation="vertical"
-    android:gravity="center">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/background1"
+              tools:context="org.unimelb.BirdMigration.StartActivity"
+              android:orientation="vertical"
+              android:gravity="center">
 
+    <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/locationLabel"/>
+    <TextView
+            android:id="@+id/LocationInfo"
+            android:layout_width="154dp"
+            android:layout_height="wrap_content"
+    />
     <ImageView
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:src="@drawable/logo3"/>
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logo3"/>
 
     <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp">
 
         // Pink points
         <TableRow
-            android:gravity="center_vertical">
+                android:gravity="center_vertical">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/object2"/>
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/object2"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/object2_point"
-                android:textSize="18sp"
-                android:paddingLeft="10dp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/object2_point"
+                    android:textSize="18sp"
+                    android:paddingLeft="10dp"/>
         </TableRow>
 
         // Orange points
         <TableRow
-            android:gravity="center_vertical"
-            android:layout_marginTop="20dp">
+                android:gravity="center_vertical"
+                android:layout_marginTop="20dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/object1"/>
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/object1"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/object1_point"
-                android:textSize="18sp"
-                android:paddingLeft="10dp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/object1_point"
+                    android:textSize="18sp"
+                    android:paddingLeft="10dp"/>
         </TableRow>
 
         // Black points
         <TableRow
-            android:gravity="center_vertical"
-            android:layout_marginTop="20dp">
+                android:gravity="center_vertical"
+                android:layout_marginTop="20dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/bomb"/>
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/bomb"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/bomb_point"
-                android:textSize="18sp"
-                android:paddingLeft="10dp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bomb_point"
+                    android:textSize="18sp"
+                    android:paddingLeft="10dp"/>
         </TableRow>
 
     </TableLayout>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_start"
-        android:layout_marginTop="60dp"
-        android:onClick="startGame"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_start"
+            android:layout_marginTop="60dp"
+            android:onClick="startGame"/>
+    <Switch
+            android:text="Switch"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content" android:id="@+id/locationSwitch"/>
 
 </LinearLayout>
