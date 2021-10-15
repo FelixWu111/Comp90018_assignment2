@@ -5,8 +5,11 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-
+//from youtuber Richvale Consulting
 public class Gyroscope {
+    private SensorManager sensorManager;
+    private Sensor sensor;
+    private SensorEventListener sensorEventListener;
 
     public interface Listener
     {
@@ -14,15 +17,10 @@ public class Gyroscope {
     }
 
     private Listener listener;
-
     public void setListener(Listener l)
     {
         listener =l;
     }
-
-    private SensorManager sensorManager;
-    private Sensor sensor;
-    private SensorEventListener sensorEventListener;
 
     Gyroscope(Context context)
     {

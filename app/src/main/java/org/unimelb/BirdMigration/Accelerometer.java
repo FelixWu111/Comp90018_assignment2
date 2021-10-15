@@ -5,8 +5,13 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-
+//from youtuber Richvale Consulting
 public class Accelerometer {
+
+    private SensorManager sensorManager;
+    private Sensor sensor;
+    private SensorEventListener sensorEventListener;
+    
     public interface Listener
     {
         void onTranslation(float tx,float ty, float tz);
@@ -15,13 +20,9 @@ public class Accelerometer {
     private Listener listener;
     public void setListener(Listener l)
     {
+
         listener =l;
     }
-
-    private SensorManager sensorManager;
-    private Sensor sensor;
-    private SensorEventListener sensorEventListener;
-
 
     Accelerometer(Context context)
     {

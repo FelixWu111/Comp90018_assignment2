@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
     // Flag
     private boolean actionFlag = false;
     private boolean startFlag = false;
-    //flag new
-    private boolean modeFlag = false;
 
     // SoundPlayer
     private SoundPlayer soundPlayer;
@@ -134,20 +132,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         //accelerometer sensor
-        accelerometer = new Accelerometer(this);
-        accelerometer.setListener(new Accelerometer.Listener() {
-            @Override
-            public void onTranslation(float tx, float ty, float tz) {
-                if(tz > 2.0f)
-                {
-                    //actionFlag = true;//up
-                }
-                else if(tz < -2.0f){
-                     //actionFlag = false;
-                }
-            }
-        });
-
+        //accelerometer = new Accelerometer(this);
         //gyroscope sensor
         gyroscope = new Gyroscope(this);
         gyroscope.setListener(new Gyroscope.Listener() {
@@ -181,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
 
     // This method defines the moving position and distance of each object after starting game
     public void changePos() {
-
         // Evoke hitCheck function
         hitCheck(food, false);
         hitCheck(food2, false);
