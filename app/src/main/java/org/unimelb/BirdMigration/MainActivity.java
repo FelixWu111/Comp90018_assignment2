@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     // Flag
     private boolean actionFlag = false;
     private boolean startFlag = false;
+    //flag new
+    private boolean modeFlag = false;
 
     // SoundPlayer
     private SoundPlayer soundPlayer;
@@ -53,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
     private SensorManager sensorManager;
     private Sensor lightSensor;
     private SensorEventListener lightEventListener;
+    //motion sensor
+    private Accelerometer accelerometer;
+    private Gyroscope gyroscope;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,18 +132,51 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
+
+        //accelerometer sensor
+        accelerometer = new Accelerometer(this);
+        accelerometer.setListener(new Accelerometer.Listener() {
+            @Override
+            public void onTranslation(float tx, float ty, float tz) {
+                if(tz > 2.0f)
+                {
+                    //actionFlag = true;//up
+                }
+                else if(tz < -2.0f){
+                     //actionFlag = false;
+                }
+            }
+        });
+
+        //gyroscope sensor
+        gyroscope = new Gyroscope(this);
+        gyroscope.setListener(new Gyroscope.Listener() {
+            @Override
+            public void onRotation(float rx, float ry, float rz) {
+                if(rx < -1.0f){
+                    actionFlag = true;//up
+                }
+                else if(rx > 1.0f){
+                    actionFlag = false;
+                }
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         sensorManager.registerListener(lightEventListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        accelerometer.register();
+        gyroscope.register();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(lightEventListener);
+        accelerometer.unregister();
+        gyroscope.unregister();
     }
 
     // This method defines the moving position and distance of each object after starting game
@@ -162,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
             // Releasing
             catcherY += catcherSpeed;
         }
+
 
         // Ensure the catcher won't jump out of the home screen
         if (catcherY < 0) catcherY = 0;
