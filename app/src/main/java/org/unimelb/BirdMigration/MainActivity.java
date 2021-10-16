@@ -53,8 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private SensorManager sensorManager;
     private Sensor lightSensor;
     private SensorEventListener lightEventListener;
-    //motion sensor
-    private Accelerometer accelerometer;
+
     private Gyroscope gyroscope;
 
     @Override
@@ -90,6 +89,19 @@ public class MainActivity extends AppCompatActivity {
         // Load the background music
         Intent intent = new Intent(getApplicationContext(), MusicServer.class);
         startService(intent);
+
+        //gyroscope sensor
+        gyroscope = new Gyroscope(this);
+        gyroscope.setListener(new Gyroscope.Listener() {
+            @Override
+            public void onRotation(float rx, float ty, float rz) {
+                if(rx < -1.0f){
+                    actionFlag = true;
+                }else if(rx > 1.0f){
+                    actionFlag = false;
+                }
+            }
+        });
 
         // Declare light sensor
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -130,29 +142,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
-
-        //accelerometer sensor
-        //accelerometer = new Accelerometer(this);
-        //gyroscope sensor
-        gyroscope = new Gyroscope(this);
-        gyroscope.setListener(new Gyroscope.Listener() {
-            @Override
-            public void onRotation(float rx, float ry, float rz) {
-                if(rx < -1.0f){
-                    actionFlag = true;//up
-                }
-                else if(rx > 1.0f){
-                    actionFlag = false;
-                }
-            }
-        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         sensorManager.registerListener(lightEventListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        accelerometer.register();
         gyroscope.register();
     }
 
@@ -160,12 +155,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(lightEventListener);
-        accelerometer.unregister();
         gyroscope.unregister();
+
     }
 
     // This method defines the moving position and distance of each object after starting game
     public void changePos() {
+
         // Evoke hitCheck function
         hitCheck(food, false);
         hitCheck(food2, false);
@@ -184,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
             // Releasing
             catcherY += catcherSpeed;
         }
-
 
         // Ensure the catcher won't jump out of the home screen
         if (catcherY < 0) catcherY = 0;
