@@ -5,7 +5,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-
+//from youtuber Richvale Consulting
 public class Gyroscope {
 
     public interface Listener{
