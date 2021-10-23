@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true"/>
     <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="true"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
@@ -20,6 +19,8 @@
         <activity android:name="org.unimelb.BirdMigration.MainActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="org.unimelb.BirdMigration.ResultActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="org.unimelb.BirdMigration.NewActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name="org.unimelb.BirdMigration.StartActivity"
