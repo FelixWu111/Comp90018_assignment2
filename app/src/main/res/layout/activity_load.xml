@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding = "16dp"
+    tools:context="org.unimelb.BirdMigration.LoadActivity"
+    android:background="#29000000">
+
+    <include layout="@layout/video_play"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="#fff"
+              android:textSize="25sp"
+              android:id="@+id/load_view"
+              android:layout_above="@+id/progress_bar"
+              android:layout_marginBottom="20dp"/>
+
+    <ProgressBar android:layout_width="387dp"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/progress_bar"
+                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                 android:layout_alignParentBottom="true"
+                 android:layout_marginBottom="20dp"
+    />
+    <TextView android:layout_width="395dp"
+              android:layout_height="wrap_content"
+              android:textColor="#fff"
+              android:textSize="12sp"
+              android:id="@+id/info_view"
+              android:layout_above="@+id/progress_bar"
+              android:layout_marginBottom="8dp"/>
+
+
+</RelativeLayout>
