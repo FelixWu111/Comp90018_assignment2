@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BirdMigration">
 
+
         <activity android:name="org.unimelb.BirdMigration.MainActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="org.unimelb.BirdMigration.ResultActivity"
@@ -25,12 +26,16 @@
         <activity
             android:name="org.unimelb.BirdMigration.StartActivity"
             android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name="org.unimelb.BirdMigration.LoadActivity"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name="org.unimelb.BirdMigration.MusicServer">
             <intent-filter>
                 <action android:name="android.intent.action.MUSIC"/>

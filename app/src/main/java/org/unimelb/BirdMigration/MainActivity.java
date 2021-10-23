@@ -12,13 +12,13 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -54,7 +54,11 @@ public class MainActivity extends AppCompatActivity {
     private Sensor lightSensor;
     private SensorEventListener lightEventListener;
 
+    private Gyroscope gyroscope;
+    private boolean modeSign;
+    private boolean lightSign;
 
+    private String weather = "Clear";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,61 +90,127 @@ public class MainActivity extends AppCompatActivity {
         scoreLabel.setText(getString(R.string.score, score));
 
         // Load the background music
-        Intent intent = new Intent(getApplicationContext(), MusicServer.class);
-        startService(intent);
+        Intent musciIntent = new Intent(getApplicationContext(), MusicServer.class);
+        startService(musciIntent);
 
+        Intent intent = getIntent();
 
-        // Declare light sensor
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        // weather sensor entry
+        //load weather and set background
+        weather = intent.getStringExtra("weather");
+        modeSign = intent.getBooleanExtra("modeSign", false);
+        lightSign = intent.getBooleanExtra("lightSign", false);
+        weatherBackground(weather);
 
-        // In case the sensor does not exist. 
-        if (lightSensor == null) {
-            Toast.makeText(this, "Light sensor is missing.", Toast.LENGTH_SHORT).show();
-            finish();
+        // motion sensor entry
+        if (modeSign) {
+            //gyroscope sensor
+            gyroscope = new Gyroscope(this);
+            gyroscope.setListener(new Gyroscope.Listener() {
+                @Override
+                public void onRotation(float rx, float ty, float rz) {
+                    if (rx < -1.0f) {
+                        actionFlag = true;
+                    } else if (rx > 1.0f) {
+                        actionFlag = false;
+                    }
+                }
+            });
         }
 
-        // Activities on light sensor value intake in every 2 seconds
-        lightEventListener = new SensorEventListener() {
-            private long lastTimestamp;
+        // light sensor entry
+        if (lightSign) {
+            // Declare light sensor
+            sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+            lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 
-            @Override
-            public void onSensorChanged(SensorEvent sensorEvent) {
-                long currentTimestamp = sensorEvent.timestamp;
+            // In case the sensor does not exist.
+            if (lightSensor == null) {
+                Toast.makeText(this, "Light sensor is missing.", Toast.LENGTH_SHORT).show();
+                finish();
+            }
 
-                // Read sensor data every 2 seconds
-                if (currentTimestamp - lastTimestamp >= TimeUnit.SECONDS.toNanos(2)) {
-                    lastTimestamp = currentTimestamp;
-                    float value = sensorEvent.values[0];
+            // Activities on light sensor value intake in every 2 seconds
+            lightEventListener = new SensorEventListener() {
+                private long lastTimestamp;
 
-                    // Limit the value in a valid range
-                    int brightness = (int) (255f * value / lightSensor.getMaximumRange());
+                @Override
+                public void onSensorChanged(SensorEvent sensorEvent) {
+                    long currentTimestamp = sensorEvent.timestamp;
 
-                    // Adjust system brightness
-                    // Does not take effect in android emulators.
-                    WindowManager.LayoutParams lp = getWindow().getAttributes();
-                    lp.screenBrightness = brightness;
-                    getWindow().setAttributes(lp);
+                    // Read sensor data every 2 seconds
+                    if (currentTimestamp - lastTimestamp >= TimeUnit.SECONDS.toNanos(2)) {
+                        lastTimestamp = currentTimestamp;
+                        float value = sensorEvent.values[0];
+
+                        // Limit the value in a valid range
+                        int brightness = (int) (255f * value / lightSensor.getMaximumRange());
+
+                        // Adjust system brightness
+                        // Does not take effect in android emulators.
+                        WindowManager.LayoutParams lp = getWindow().getAttributes();
+                        lp.screenBrightness = brightness;
+                        getWindow().setAttributes(lp);
+                    }
                 }
-            }
 
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int i) {
 
-            }
-        };
+                @Override
+                public void onAccuracyChanged(Sensor sensor, int i) {
+
+                }
+            };
+        }
     }
 
+    protected void weatherBackground(String weather){
+        // ["Clear", "Light Cloud", "Heavy Cloud", "Showers", "Light Rain", "Heavy Rain", "Thunderstorm", "Hail", "Sleet", "Snow"]
+        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.background);
+
+        switch (weather) {
+            case "Clear":  mainLayout.setBackground(this.getResources().getDrawable(R.drawable.sunnybackground));
+                break;
+            case "Light Cloud":  mainLayout.setBackground(this.getResources().getDrawable(R.drawable.cloudbackground));
+                break;
+            case "Heavy Cloud":  mainLayout.setBackground(this.getResources().getDrawable(R.drawable.cloudbackground));
+                break;
+            case "Showers":  mainLayout.setBackground(this.getResources().getDrawable(R.drawable.rainbackground));
+                break;
+            case "Light Rain":  mainLayout.setBackground(this.getResources().getDrawable(R.drawable.rainbackground));
+                break;
+            case "Heavy Rain":  mainLayout.setBackground(this.getResources().getDrawable(R.drawable.rainbackground));
+                break;
+            case "Thunderstorm":  mainLayout.setBackground(this.getResources().getDrawable(R.drawable.storm));
+                break;
+            case "Hail":  mainLayout.setBackground(this.getResources().getDrawable(R.drawable.snowbackground));
+                break;
+            case "Sleet":  mainLayout.setBackground(this.getResources().getDrawable(R.drawable.snowbackground));
+                break;
+            case "Snow": mainLayout.setBackground(this.getResources().getDrawable(R.drawable.snowbackground));
+                break;
+            default: mainLayout.setBackground(this.getResources().getDrawable(R.drawable.background));
+                break;
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();
-        sensorManager.registerListener(lightEventListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        if (lightSign){
+            sensorManager.registerListener(lightEventListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);}
+        if (modeSign) {
+            gyroscope.register();
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        sensorManager.unregisterListener(lightEventListener);
+        if (lightSign){
+            sensorManager.unregisterListener(lightEventListener);}
+        if (modeSign) {
+            gyroscope.unregister();
+        }
+
     }
 
     // This method defines the moving position and distance of each object after starting game
@@ -197,6 +267,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
                 // transport single data
                 intent.putExtra("Score", score);
+                intent.putExtra("Weather", weather);
                 startActivity(intent);
             }
         }
@@ -226,9 +297,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }, 0, 15);
         } else {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN && !modeSign) {
                 actionFlag = true;
-            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+            } else if (event.getAction() == MotionEvent.ACTION_UP && !modeSign) {
                 actionFlag = false;
             }
         }

@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ResultActivity extends AppCompatActivity {
 
+    private String weather = "Clear";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +22,10 @@ public class ResultActivity extends AppCompatActivity {
         TextView highScoreLabel = findViewById(R.id.highScoreLabel);
 
         // get the value of score from MainActivity
-        int score = getIntent().getIntExtra("Score", 0);
+        Intent intetnReturn = getIntent();
+        int score = intetnReturn.getIntExtra("Score", 0);
+        weather = intetnReturn.getStringExtra("Weather");
+
         scoreLabel.setText(getString(R.string.final_score, score));
 
         // High Score
@@ -45,12 +50,16 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     // Jump to the MainActivity interface
-    //this is old version
     public void TryAgain(View view) {
-        //startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        startActivity(new Intent(getApplicationContext(), StartActivity.class));
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 
+    // Jump to the home
+    public void ReturnHome(View view) {
+        Intent intentReturn = new Intent(getApplicationContext(), StartActivity.class);
+        intentReturn.putExtra("weather", weather);
+        startActivity(intentReturn);
+    }
 
     // This method is executed when the phone presses the 'back' button
     @Override

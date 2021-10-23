@@ -94,8 +94,14 @@
         android:onClick="newGame"/>
 
     <Switch
-            android:text="Switch"
-            android:layout_width="149dp"
+            android:text="Motion Mode Switch"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/locationSwitch"/>
+
+    <Switch
+            android:text="Light Mode Switch"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content" android:id="@+id/lightSwitch"/>
+
 
 </LinearLayout>
