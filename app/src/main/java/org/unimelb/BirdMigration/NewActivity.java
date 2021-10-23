@@ -23,7 +23,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends AppCompatActivity {
+public class NewActivity extends AppCompatActivity {
     private final Handler handler = new Handler();
     // Elements
     private TextView scoreLabel, startLabel;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private Sensor lightSensor;
     private SensorEventListener lightEventListener;
 
-    //private Gyroscope gyroscope;
+    private Gyroscope gyroscope;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,23 +91,23 @@ public class MainActivity extends AppCompatActivity {
         startService(intent);
 
         //gyroscope sensor
-        //gyroscope = new Gyroscope(this);
-        //gyroscope.setListener(new Gyroscope.Listener() {
-            //@Override
-           //public void onRotation(float rx, float ty, float rz) {
-                //if(rx < -1.0f){
-                    //actionFlag = true;
-                //}else if(rx > 1.0f){
-                    //actionFlag = false;
-                //}
-            //}
-       // });
+        gyroscope = new Gyroscope(this);
+        gyroscope.setListener(new Gyroscope.Listener() {
+            @Override
+            public void onRotation(float rx, float ty, float rz) {
+                if(rx < -1.0f){
+                    actionFlag = true;
+                }else if(rx > 1.0f){
+                    actionFlag = false;
+                }
+            }
+        });
 
         // Declare light sensor
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 
-        // In case the sensor does not exist. 
+        // In case the sensor does not exist.
         if (lightSensor == null) {
             Toast.makeText(this, "Light sensor is missing.", Toast.LENGTH_SHORT).show();
             finish();
@@ -148,14 +148,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         sensorManager.registerListener(lightEventListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        //gyroscope.register();
+        gyroscope.register();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(lightEventListener);
-        //gyroscope.unregister();
+        gyroscope.unregister();
 
     }
 

@@ -45,9 +45,12 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     // Jump to the MainActivity interface
+    //this is old version
     public void TryAgain(View view) {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), StartActivity.class));
     }
+
 
     // This method is executed when the phone presses the 'back' button
     @Override

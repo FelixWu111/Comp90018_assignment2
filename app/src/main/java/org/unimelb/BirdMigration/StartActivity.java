@@ -1,6 +1,7 @@
 package org.unimelb.BirdMigration;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -92,6 +93,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     // Location udate
+    @SuppressLint("MissingPermission")
     private void LocationUpdate(){
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -186,5 +188,10 @@ public class StartActivity extends AppCompatActivity {
     public void startGame(View view) {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
+
+    public void newGame(View view){
+        startActivity(new Intent(getApplicationContext(), NewActivity.class));
+    }
+
 
 }
