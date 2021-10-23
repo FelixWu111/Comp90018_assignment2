@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
     private Sensor lightSensor;
     private SensorEventListener lightEventListener;
 
-    //private Gyroscope gyroscope;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,18 +89,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), MusicServer.class);
         startService(intent);
 
-        //gyroscope sensor
-        //gyroscope = new Gyroscope(this);
-        //gyroscope.setListener(new Gyroscope.Listener() {
-            //@Override
-           //public void onRotation(float rx, float ty, float rz) {
-                //if(rx < -1.0f){
-                    //actionFlag = true;
-                //}else if(rx > 1.0f){
-                    //actionFlag = false;
-                //}
-            //}
-       // });
 
         // Declare light sensor
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -148,15 +135,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         sensorManager.registerListener(lightEventListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        //gyroscope.register();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(lightEventListener);
-        //gyroscope.unregister();
-
     }
 
     // This method defines the moving position and distance of each object after starting game
