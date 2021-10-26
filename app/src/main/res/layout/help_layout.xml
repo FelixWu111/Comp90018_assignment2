@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center">
+
+        // Background
+        <TableRow>
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:src="@drawable/background_text"/>
+        </TableRow>
+
+<!--        <TextView-->
+<!--            android:text="Background"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="40dp"-->
+<!--            android:gravity="center"/>-->
+
+        <TableRow>
+            <TextView
+                android:text="\t\t\t\tIn this game, you will act as a bird who intends to migrate to a faraway place. On the way, you can get energy by catching flying insects in the air, but you should also pay attention to avoid being arrested by traps. \n\n \t\t\t\tCome on ! Try to get more energy and fly to the distance !"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="fill_horizontal"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+        </TableRow>
+    </TableLayout>
+
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center">
+
+        // Help text
+        <TableRow
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:src="@drawable/help_text"/>
+            
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="HELP"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="40dp" />-->
+        </TableRow>
+
+        // 30 points
+        <TableRow
+            android:gravity="center_vertical">
+
+            <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/insect3"
+                    android:layout_marginRight="70dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/object2_point"
+                    android:textColor="#000000"
+                    android:textSize="25sp" />
+        </TableRow>
+
+        // 10 points
+        <TableRow
+                android:gravity="center_vertical"
+                android:layout_marginTop="20dp">
+
+            <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/insect1"
+                    android:layout_marginRight="70dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/object1_point"
+                    android:textColor="#000000"
+                    android:textSize="25sp" />
+        </TableRow>
+
+        // Game Over
+        <TableRow
+                android:gravity="center_vertical"
+                android:layout_marginTop="20dp">
+
+            <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/trap"
+                    android:layout_marginRight="70dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bomb_point"
+                    android:textColor="#000000"
+                    android:textSize="25sp" />
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content">-->
+
+<!--    <TableLayout-->
+<!--        android:id="@+id/tableLayout"-->
+<!--        android:layout_width="280dp"-->
+<!--        android:layout_height="300dp"-->
+<!--        android:background="@drawable/table_corner"-->
+<!--        android:paddingLeft="20dp"-->
+<!--        android:paddingTop="15dp"-->
+<!--        android:paddingRight="25dp"-->
+<!--        android:paddingBottom="15dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        tools:ignore="MissingConstraints"-->
+<!--        tools:layout_editor_absoluteY="171dp">-->
+
+<!--        <TableRow-->
+<!--            android:layout_height="34dp"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:gravity="center">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="HELP"-->
+<!--                android:textSize="40dp"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/tableLayout"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+<!--        </TableRow>-->
+
+<!--        &lt;!&ndash;   higher food   &ndash;&gt;-->
+<!--        <TableRow android:gravity="center_vertical">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:src="@drawable/insect3" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingLeft="10dp"-->
+<!--                android:text="@string/object2_point"-->
+<!--                android:textSize="25sp"-->
+<!--                android:textStyle="bold" />-->
+<!--        </TableRow>-->
+
+<!--        &lt;!&ndash;      lower food &ndash;&gt;-->
+<!--        <TableRow-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:gravity="center_vertical">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:src="@drawable/insect1" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingLeft="10dp"-->
+<!--                android:text="@string/object1_point"-->
+<!--                android:textSize="25sp"-->
+<!--                android:textStyle="bold" />-->
+<!--        </TableRow>-->
+
+
+<!--        &lt;!&ndash;    Trap  &ndash;&gt;-->
+<!--        <TableRow-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:gravity="center_vertical">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:src="@drawable/trap" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingLeft="10dp"-->
+<!--                android:text="@string/bomb_point"-->
+<!--                android:textSize="25sp"-->
+<!--                android:textStyle="bold" />-->
+<!--        </TableRow>-->
+<!--    </TableLayout>-->
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+

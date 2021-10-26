@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/jungle3"
     android:id="@+id/background"
     tools:context="org.unimelb.BirdMigration.MainActivity"
     android:orientation="vertical">
@@ -31,28 +31,30 @@
 
         <ImageView
             android:id="@+id/catcher"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/catcher"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/bird"
             android:layout_gravity="center_vertical"/>
 
         <ImageView
             android:id="@+id/bomb"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/bomb"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/trap"/>
 
+        <!--    10    -->
         <ImageView
             android:id="@+id/object1"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/object1"/>
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/insect1"/>
 
+        <!--    30   -->
         <ImageView
             android:id="@+id/object2"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/object2"/>
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/insect3"/>
 
     </FrameLayout>
 </LinearLayout>

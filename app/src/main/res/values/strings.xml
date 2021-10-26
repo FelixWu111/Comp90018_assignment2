@@ -10,7 +10,7 @@
 
     <string name="game_over">Game Over</string>
     <string name="final_score">%d</string>
-    <string name="high_score">High Score : %d</string>
+    <string name="high_score">Highest Score : %d</string>
     <string name="button_try_again">Try Again</string>
     <string name="button_return_home"/>
 </resources>

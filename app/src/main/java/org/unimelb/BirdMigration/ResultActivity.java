@@ -28,10 +28,7 @@ public class ResultActivity extends AppCompatActivity {
 
         scoreLabel.setText(getString(R.string.final_score, score));
 
-        // High Score
-        // 在Android中我们通常使用 一个轻量级的存储类——SharedPreferences来保存用户偏好的参数
-        // SharedPreferences也是使用xml文件, 类似于Map集合,使用键-值的形式来存储数据
-        // 我们只需要调用SharedPreferences的getXxx(name), 就可以根据键获得对应的值
+        // Highest Score
         SharedPreferences sharedPreferences = getSharedPreferences("Game_Data", Context.MODE_PRIVATE);
         int highScore = sharedPreferences.getInt("High_Score", 0);
 
@@ -54,10 +51,11 @@ public class ResultActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 
-    // Jump to the home
+    // Jump to the  (StartActivity)
     public void ReturnHome(View view) {
         Intent intentReturn = new Intent(getApplicationContext(), StartActivity.class);
         intentReturn.putExtra("weather", weather);
+//        intentReturn.putExtra("city", cityName);
         startActivity(intentReturn);
     }
 

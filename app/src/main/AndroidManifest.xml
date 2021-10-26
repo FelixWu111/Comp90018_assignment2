@@ -21,12 +21,11 @@
             android:screenOrientation="portrait"/>
         <activity android:name="org.unimelb.BirdMigration.ResultActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="org.unimelb.BirdMigration.NewActivity"
-            android:screenOrientation="portrait"/>
         <activity
             android:name="org.unimelb.BirdMigration.StartActivity"
             android:screenOrientation="portrait">
         </activity>
+
         <activity
                 android:name="org.unimelb.BirdMigration.LoadActivity"
                 android:screenOrientation="portrait">

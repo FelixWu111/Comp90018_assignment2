@@ -214,6 +214,7 @@ public class LoadActivity extends AppCompatActivity {
                     // Jump to next activity, and pass weather to it
                     Intent intent = new Intent(getApplicationContext(), StartActivity.class);
                     intent.putExtra("weather", weather);
+                    intent.putExtra("cityName", cityName);  //新增
                     startActivity(intent);
 
                 } catch (JSONException e) {
