@@ -21,7 +21,7 @@ public class MusicServer extends Service {
         super.onStart(intent, startId);
 
         if (mediaPlayer == null) {
-            // R.raw.background是音乐资源文件，MP3格式的
+            // R.raw.background is a music resource, in form of MP3
             mediaPlayer = MediaPlayer.create(this, R.raw.background2);
             mediaPlayer.setLooping(true);
             mediaPlayer.start();
